@@ -7,7 +7,9 @@ The module determines whether it's on the left or right side of the mirror and d
 
 ## Install
 `cd ~/MagicMirror/modules`
+
 `git clone https://github.com/Tueti/MMM-MovieListings.git`
+
 `cd MMM-MovieListings && npm install`
 
 ## Dependencies
