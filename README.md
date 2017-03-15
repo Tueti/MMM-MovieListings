@@ -5,6 +5,11 @@ The module determines whether it's on the left or right side of the mirror and d
 ![MMM-MovieListings](https://raw.githubusercontent.com/Tueti/MMM-MovieListings/master/MMM-MovieListings_left.jpg)
 ![MMM-MovieListings](https://raw.githubusercontent.com/Tueti/MMM-MovieListings/master/MMM-MovieListings_right.jpg)
 
+## Install
+`cd ~/MagicMirror/modules`
+`git clone https://github.com/Tueti/MMM-MovieListings.git`
+`cd MMM-MovieListings && npm install`
+
 ## Dependencies
 `request` - is being installed via `npm install`
 
