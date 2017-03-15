@@ -1,0 +1,14 @@
+{
+  "name": "mmm-movielistings",
+  "version": "1.0.0",
+  "description": "MagicMirror module for current movie listing playing in theaters",
+  "main": "MMM-MovieListings.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Jens",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
