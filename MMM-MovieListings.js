@@ -2,6 +2,7 @@
  * Module: MMM-MovieListing
  *
  * By Christian Jens http://christianjens.de
+ * Modified by Kyle Johnson
  * MIT Licensed.
  */
 
@@ -18,6 +19,7 @@ Module.register('MMM-MovieListings', {
     refreshInterval: 1000 * 60 * 60 * 24, //Once a day
     baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
     animationSpeed: 2.5 * 1000,
+    maxPlotLength: 200,
     pageChangeInterval: 30 * 1000
 	},
 
@@ -138,7 +140,12 @@ Module.register('MMM-MovieListings', {
     var tagline = document.createElement('div');
     tagline.classList = 'dimmed';
     tagline.innerHTML = movie.tagline;
-
+    
+    // set up plot
+    var plot = document.createElement('div');
+    plot.classList = 'dimmed';
+    plot.innerHTML = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength - 2))}&#8230;` : movie.overview;
+    
     // Set up details => image
     var image = document.createElement('img');
     image.src = 'https://image.tmdb.org/t/p/w154/' + movie.poster_path; // "w92", "w154", "w185", "w342", "w500", "w780", or "original"
@@ -242,6 +249,7 @@ Module.register('MMM-MovieListings', {
     // Set up entire view in container
     posterWrapper.appendChild(title);
     posterWrapper.appendChild(tagline);
+    posterWrapper.appendChild(plot);
     posterWrapper.appendChild(detailsTable);
 
     return posterWrapper;
