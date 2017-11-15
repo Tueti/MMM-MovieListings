@@ -153,7 +153,7 @@ Module.register('MMM-MovieListings', {
       } else {
         plotContent = movie.overviewShort;
       }
-      plot.innerHTML = plotContent.split(/((?:\w+.? ){10})/g).filter(Boolean).join("<br/>");;
+      plot.innerHTML = plotContent.split(/((?:\w+.?,?;?!?\?? ){10})/g).filter(Boolean).join("<br/>");;
     }
     
     // Set up details => image
