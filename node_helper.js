@@ -74,7 +74,7 @@ module.exports = NodeHelper.create({
             }
 
             // Add shortened plot to payload
-            movieData.details.overviewShort = plotContentShortened;
+            movieData.details.overviewShort = plotContent;
 
             self.sendSocketNotification('MOVIE_ID_DONE', movieData);
           }
