@@ -10,6 +10,7 @@
 
 var NodeHelper = require('node_helper');
 var request = require('request');
+var wordwrap = require('word-wrap');
 
 module.exports = NodeHelper.create({
   start: function () {
@@ -64,6 +65,18 @@ module.exports = NodeHelper.create({
               details: body,
               credits: subBody
             };
+
+            // Create shortened version of plot with linebreaks so it displays nicely
+            var plotContent = "";
+            if (payload.config.maxPlotLength == 0) {
+              plotContent = movieData.details.overview
+            } else {
+              plotContent = movieData.details.overview.length > payload.config.maxPlotLength ? `${movieData.details.overview.substring(0, (payload.config.maxPlotLength))}&#8230;` : movieData.details.overview;
+            }
+            var plotContentShortened = wordwrap(plotContent, {width: 45});
+
+            // Add shortened plot to payload
+            movieData.details.overviewShort = plotContentShortened;
 
             self.sendSocketNotification('MOVIE_ID_DONE', movieData);
           }

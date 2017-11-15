@@ -6,8 +6,6 @@
  * MIT Licensed.
  */
 
-var wordwrap = require('word-wrap');
-
 Module.register('MMM-MovieListings', {
 
   // Default module config.
@@ -33,7 +31,8 @@ Module.register('MMM-MovieListings', {
   getTranslations: function() {
     return {
       en: "translations/en.json",
-      de: "translations/de.json"
+      de: "translations/de.json",
+      sv: "translations/sv.json"
     }
   },
 
@@ -152,9 +151,9 @@ Module.register('MMM-MovieListings', {
       if (this.config.maxPlotLength == 0) {
         plotContent = movie.overview
       } else {
-        plotContent = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength))}&#8230;` : movie.overview;
+        plotContent = movie.overviewShort;
       }
-      plot.innerHTML = wordwrap(plotContent, {width: 45});
+      plot.innerHTML = plotContent;
     }
     
     // Set up details => image
@@ -323,7 +322,8 @@ Module.register('MMM-MovieListings', {
     self.sendSocketNotification('FETCH_MOVIE_ID', {
       movieId: movies[self.nextIndex].id,
       apiKey: self.config.apiKey,
-      language: self.config.language
+      language: self.config.language,
+      config: self.config
     });
     self.nextIndex++;
 
@@ -331,7 +331,8 @@ Module.register('MMM-MovieListings', {
       self.sendSocketNotification('FETCH_MOVIE_ID', {
         movieId: movies[self.nextIndex].id,
         apiKey: self.config.apiKey,
-        language: self.config.language
+        language: self.config.language,
+        config: self.config
       });
       self.nextIndex++;
 
