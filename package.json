@@ -9,6 +9,7 @@
   "author": "Christian Jens",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "word-wrap": "^1.2.3"
   }
 }

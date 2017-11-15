@@ -14,6 +14,7 @@ The module determines whether it's on the left or right side of the mirror and d
 
 ## Dependencies
 `request` - is being installed via `npm install`
+`word-wrap` - is being installed via `npm install`
 
 ## Config
 The entry in `config.js` can include the following options:
@@ -22,6 +23,8 @@ The entry in `config.js` can include the following options:
 |---|---|---|
 |`header`|The header of the module|Kinofilme|
 |`apiKey`|**required** Your API key. Please insert the 'v3 (auth)' key here, not v4. Signup [here](https://www.themoviedb.org/account/signup), then get a key in your profile section -> api|_none_|
+|`includeMoviePlot`|Determins whether a short plot discription will be shown or not. Set to either `true` or `false`|`false`|
+|`maxPlotLength`|Sets the max length of the movie plot description. Only necessary if `includeMoviePlot` is set to `true`. Setting this value to `0` show entire plot. NOTE: This might be a long text and mess with the layout.|`198`|
 |`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`DE`|
 |`language`|The language for the movie titles. Either a simple [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code (DE for Germany, EN for english, etc.) or a region specific language as in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (de-DE for German in Germany, pt-BR for Portugese in Brazil, etc.)|`de-DE`|
 |`interface`|You can choose between a simple list view and a more detailed poster view with movie image and more details. Options are `list` and `poster`. If you choose poster, the moviesPerPage will be ignored as it willl only show one movie at a time|`poster`|

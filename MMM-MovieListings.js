@@ -1,10 +1,12 @@
 /* Magic Mirror
  * Module: MMM-MovieListing
  *
- * By Christian Jens http://christianjens.de
+ * By Christian Jens https://tueti.github.io
  * Modified by Kyle Johnson
  * MIT Licensed.
  */
+
+var wordwrap = require('word-wrap');
 
 Module.register('MMM-MovieListings', {
 
@@ -14,12 +16,13 @@ Module.register('MMM-MovieListings', {
 		region: 'DE',
     language: 'de-DE',
     interface: 'poster', //'list', 'poster', 'detailed'
+    includeMoviePlot: false,
+    maxPlotLength: 198,
     header: 'Kinofilme',
     moviesPerPage: 0,
     refreshInterval: 1000 * 60 * 60 * 24, //Once a day
     baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
     animationSpeed: 2.5 * 1000,
-    maxPlotLength: 200,
     pageChangeInterval: 30 * 1000
 	},
 
@@ -142,9 +145,17 @@ Module.register('MMM-MovieListings', {
     tagline.innerHTML = movie.tagline;
     
     // set up plot
-    var plot = document.createElement('div');
-    plot.classList = 'dimmed';
-    plot.innerHTML = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength - 2))}&#8230;` : movie.overview;
+    if (this.config.includeMoviePlot) {
+      var plot = document.createElement('div');
+      plot.classList = 'dimmed';
+      var plotContent = "";
+      if (this.config.maxPlotLength == 0) {
+        plotContent = movie.overview
+      } else {
+        plotContent = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength))}&#8230;` : movie.overview;
+      }
+      plot.innerHTML = wordwrap(plotContent, {width: 45});
+    }
     
     // Set up details => image
     var image = document.createElement('img');
@@ -249,8 +260,10 @@ Module.register('MMM-MovieListings', {
     // Set up entire view in container
     posterWrapper.appendChild(title);
     posterWrapper.appendChild(tagline);
-    posterWrapper.appendChild(plot);
     posterWrapper.appendChild(detailsTable);
+    if (this.config.includeMoviePlot) {
+      posterWrapper.appendChild(plot);
+    }
 
     return posterWrapper;
   },
