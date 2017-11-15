@@ -126,8 +126,8 @@ Module.register('MMM-MovieListings', {
 
   createPosterView: function(movieSet) {
 
-    var movie = JSON.parse(movieSet.details);
-    var credits = JSON.parse(movieSet.credits);
+    var movie = movieSet.details;
+    var credits = movieSet.credits;
 
     // create container
     var posterWrapper = document.createElement('div');

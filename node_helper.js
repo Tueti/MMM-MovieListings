@@ -56,14 +56,14 @@ module.exports = NodeHelper.create({
 
         request(
           'https://api.themoviedb.org/3/movie/' + payload.movieId + '/credits?api_key=' + payload.apiKey,
-          function(subError, subRresponse, subBody) {
+          function(subError, subRresponse, creditsBody) {
             if (subError) {
               return self.sendSocketNotification('MOVIE_ERROR', error);
             }
 
             var movieData = {
-              details: body,
-              credits: subBody
+              details: JSON.parse(body),
+              credits: JSON.parse(creditsBody)
             };
 
             // Create shortened version of plot with linebreaks so it displays nicely
