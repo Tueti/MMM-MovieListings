@@ -3,5 +3,6 @@
   "MIN": "min",
   "CAST": "Cast",
   "DIRECTOR": "Director",
-  "RATINGS": "ratings"
+  "RATINGS": "ratings",
+  "GENRE": "Genre"
 }
