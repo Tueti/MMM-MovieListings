@@ -32,7 +32,8 @@ Module.register('MMM-MovieListings', {
     return {
       en: "translations/en.json",
       de: "translations/de.json",
-      sv: "translations/sv.json"
+      sv: "translations/sv.json",
+      es: "translations/es.json"
     }
   },
 
