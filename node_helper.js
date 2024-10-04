@@ -38,7 +38,7 @@ module.exports = NodeHelper.create({
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MWU0MzBmOWE2NmE1NTBjNjJjMTkzY2Q1Yzk1NThhNSIsIm5iZiI6MTcyNzg5MTYxOC4zNDg1MjMsInN1YiI6IjY2MjNkYjBmODdlNjNlMDE4ODczNzllZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p0gEB-x1V4GTieEa9Pd-kJH6ycl12JQ-hClb1XiPj5k'
+                Authorization: 'Bearer ' + payload.token
             }
         };
 
@@ -62,7 +62,7 @@ module.exports = NodeHelper.create({
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MWU0MzBmOWE2NmE1NTBjNjJjMTkzY2Q1Yzk1NThhNSIsIm5iZiI6MTcyNzg5MTYxOC4zNDg1MjMsInN1YiI6IjY2MjNkYjBmODdlNjNlMDE4ODczNzllZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p0gEB-x1V4GTieEa9Pd-kJH6ycl12JQ-hClb1XiPj5k' // + payload.token
+                Authorization: 'Bearer '  + payload.token
             }
         };
 
@@ -77,7 +77,7 @@ module.exports = NodeHelper.create({
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MWU0MzBmOWE2NmE1NTBjNjJjMTkzY2Q1Yzk1NThhNSIsIm5iZiI6MTcyNzg5MTYxOC4zNDg1MjMsInN1YiI6IjY2MjNkYjBmODdlNjNlMDE4ODczNzllZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p0gEB-x1V4GTieEa9Pd-kJH6ycl12JQ-hClb1XiPj5k'
+                    Authorization: 'Bearer ' + payload.token
                 }
             };
 
