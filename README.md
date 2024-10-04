@@ -2,18 +2,22 @@
 Displays the top 20 movies that are currently in theaters around you. The list is fetched from [The Movie Database](https://themoviedb.org).
 The module determines whether it's on the left or right side of the mirror and displays accordingly (image in poster mode mode will always be on the side of the mirror's edge):
 
-![MMM-MovieListings](https://raw.githubusercontent.com/Tueti/MMM-MovieListings/master/MMM-MovieListings_left.jpg)
-![MMM-MovieListings](https://raw.githubusercontent.com/Tueti/MMM-MovieListings/master/MMM-MovieListings_right.jpg)
+[![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
+
+![Example](images/image-1.png)
+![Example](images/image-2.png)
 
 ## Install
 `cd ~/MagicMirror/modules`
 
-`git clone https://github.com/Tueti/MMM-MovieListings.git`
-
-`cd MMM-MovieListings && npm install`
+`git clone https://github.com/mumblebaj/MMM-MovieListings.git`
 
 ## Dependencies
-`request` - is being installed via `npm install`
+None. Uses MagicMirror² builtin fetch
+
+## Updates
+- The Movie DB has made changes to the way in which they authenticate the different API used by the module. The API key now no longer supports all APi's. As such, the module has been updated to make use of the `API Read Access Token` instead.
+- Have removed `request` and updated to makse use of the internal fetch module instead.
 
 ## Config
 The entry in `config.js` can include the following options:
@@ -21,7 +25,7 @@ The entry in `config.js` can include the following options:
 |Option|Description|Default|
 |---|---|---|
 |`header`|The header of the module|Kinofilme|
-|`apiKey`|**required** Your API key. Please insert the 'v3 (auth)' key here, not v4. Signup [here](https://www.themoviedb.org/account/signup), then get a key in your profile section -> api|_none_|
+|`apiKey`|**required** Your API Read Access Token. Please insert the 'v3 (auth)' key here, not v4. Signup [here](https://www.themoviedb.org/account/signup), then get a key in your profile section -> api|_none_|
 |`includeMoviePlot`|Determins whether a short plot discription will be shown or not. Set to either `true` or `false`|`false`|
 |`maxPlotLength`|Sets the max length of the movie plot description. Only necessary if `includeMoviePlot` is set to `true`. Setting this value to `0` shows entire plot. NOTE: This might be a long text and mess with the layout.|`198`|
 |`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`DE`|
