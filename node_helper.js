@@ -38,7 +38,7 @@ module.exports = NodeHelper.create({
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer ' + payload.token
+                Authorization: 'Bearer ' + payload.apiKey
             }
         };
 
@@ -62,7 +62,7 @@ module.exports = NodeHelper.create({
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer '  + payload.token
+                Authorization: 'Bearer '  + payload.apiKey
             }
         };
 
@@ -77,7 +77,7 @@ module.exports = NodeHelper.create({
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
-                    Authorization: 'Bearer ' + payload.token
+                    Authorization: 'Bearer ' + payload.apiKey
                 }
             };
 
