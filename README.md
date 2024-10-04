@@ -4,8 +4,8 @@ The module determines whether it's on the left or right side of the mirror and d
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
 
-![Example](images/image-1.png)
-![Example](images/image-2.png)
+![Example](image-1.png)
+![Example](image-2.png)
 
 ## Install
 `cd ~/MagicMirror/modules`
