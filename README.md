@@ -35,6 +35,25 @@ The entry in `config.js` can include the following options:
 |`pageChangeInterval`|Interval in milliseconds to change between pages if you defined a `moviesPerPage` or set display to `poster`|`30 * 1000` = 30 seconds|
 |`refreshInterval`|Interval in milliseconds to update movie list. Please take the [API documentation](https://developers.themoviedb.org/3/getting-started/request-rate-limiting) for rate limit into account |`1000 * 60 * 60 * 24` = Once a day|
 
-## Roadmap
-1. 3rd view as a detailed list (without an image but more details as in `list`)
-2. Cache movies for 24 hours (or for the time of the `refreshInterval`) when received in `poster` view (currently every view change fetches new)
+## Example Config
+Add the module to the modules array in the `config/config.js` file:
+````javascript
+{
+		module: 'MMM-MovieListings',
+		position: 'bottom_left',
+		disabled: false,
+		config: {
+			apiKey: 'api_key_here',
+			baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
+			header: "Movies",
+			interface: "poster", //'list', 'poster', 'detailed'
+			includeMoviePlot: false,
+			//maxPlotLength: 198,
+			region: "US",
+			language: "EN", //"en-US",
+			moviesPerPage: 0,
+			pageChangeInterval: 10 * 1000,
+			refreshInterval: 1000 * 60 * 60 * 60 * 24
+		}
+},
+````
