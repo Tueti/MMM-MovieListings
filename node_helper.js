@@ -1,87 +1,96 @@
-/* Magic Mirror
- * Module: MMM-MovieListing
- *
- * By Christian Jens http://christianjens.de
- * MIT Licensed.
- */
-
-  //   https://api.themoviedb.org/3/movie/now_playing?api_key=dbe08b1e1a7061853de90f8dd0e3408e&language=de-DE&page=1&region=de
-
-
 var NodeHelper = require('node_helper');
-var request = require('request');
+const fs = require('fs');
+const os = require('os');
+
+const moviesdata = `${__dirname}/movies_data.json`;
 
 module.exports = NodeHelper.create({
-  start: function () {
-		console.log('MMM-MovieListing helper started...')
-	},
+    start: function () {
+        console.log('MMM-MovieListing helper started...');
+    },
 
-  socketNotificationReceived: function (notification, payload) {
-		if (notification === 'FETCH_MOVIE_LIST') {
-			this.fetchMovieList(payload);
-		}
-
-    if (notification === 'FETCH_MOVIE_ID') {
-      this.fetchMovieById(payload);
-    }
-	},
-
-  fetchMovieList: function(payload) {
-    var self = this;
-    var movies = [];
-
-    request(
-      payload.baseUrl + '?api_key=' + payload.apiKey + '&language=' + payload.language + '&page=1' + '&region=' + payload.region,
-      function (error, response, body) {
-        if (error) {
-          return self.sendSocketNotification('MOVIE_ERROR', error);
+    socketNotificationReceived: function (notification, payload) {
+        if (notification === 'FETCH_MOVIE_LIST') {
+            this.fetchMovieList(payload);
         }
+    },
 
-        self.sendSocketNotification('MOVIE_LIST_DONE', JSON.parse(body))
-      }
-    );
-  },
+    fetchMovieList: async function (payload) {
+        var self = this;
+        let data;
 
-  fetchMovieById: function(payload) {
-    var self = this;
-    var movie = {};
-
-    request(
-      'https://api.themoviedb.org/3/movie/' + payload.movieId + '?api_key=' + payload.apiKey + '&language=' + payload.language,
-      function (error, response, body) {
-        if (error) {
-          return self.sendSocketNotification('MOVIE_ERROR', error);
-        }
-
-        request(
-          'https://api.themoviedb.org/3/movie/' + payload.movieId + '/credits?api_key=' + payload.apiKey,
-          function(subError, subRresponse, creditsBody) {
-            if (subError) {
-              return self.sendSocketNotification('MOVIE_ERROR', error);
+        // Fetch Now Playing List
+        const url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer ' + payload.apiKey
             }
+        };
 
-            var movieData = {
-              details: JSON.parse(body),
-              credits: JSON.parse(creditsBody)
+        try {
+            const nowPlayingResponse = await fetch(url, options);
+            const nowPlayingData = await nowPlayingResponse.json();
+
+            // Slice the movies based on the config
+            const moviesToFetch = nowPlayingData.results.slice(0, payload.number_to_fetch);
+
+            // Fetch movie details and credits for each movie
+            const movieDetailsPromises = moviesToFetch.map(async(movie) => {
+                const movieDetails = await self.fetchMovieDetailsAndCredits(movie.id, payload.apiKey);
+                return movieDetails;
+            });
+
+            // Wait for all movie details and credits to be fetched
+            const moviesData = await Promise.all(movieDetailsPromises);
+
+            // Send combined movie data back to the main.js
+            self.sendSocketNotification('MOVIE_LIST_DONE', moviesData);
+        } catch (error) {
+            console.error('Error fetching now playing movies:', error);
+        }
+    },
+
+    fetchMovieDetailsAndCredits: async function (movieId, apiKey) {
+        let details;
+        let credits;
+
+        // Fetch movie details
+        const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+        const detailsOptions = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer ' + apiKey
+            }
+        };
+
+        try {
+            const detailsResponse = await fetch(detailsUrl, detailsOptions);
+            details = await detailsResponse.json();
+
+            // Fetch movie credits
+            const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`;
+            const creditsOptions = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer ' + apiKey
+                }
             };
 
-            // Create shortened version of plot with linebreaks so it displays nicely
-            var plotContent = "";
-            if (payload.config.maxPlotLength == 0) {
-              plotContent = movieData.details.overview
-            } else {
-              plotContent = movieData.details.overview.length > payload.config.maxPlotLength ? `${movieData.details.overview.substring(0, (payload.config.maxPlotLength))}&#8230;` : movieData.details.overview;
-            }
+            const creditsResponse = await fetch(creditsUrl, creditsOptions);
+            credits = await creditsResponse.json();
 
-            // Add shortened plot to payload
-            movieData.details.overviewShort = plotContent;
-
-            self.sendSocketNotification('MOVIE_ID_DONE', movieData);
-          }
-        );
-
-      }
-    );
-  }
-
+            // Combine details and credits into a single object
+            return {
+                details: details,
+                credits: credits
+            };
+        } catch (error) {
+            console.error(`Error fetching details or credits for movie ID ${movieId}:`, error);
+            return null;
+        }
+    }
 });
