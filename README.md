@@ -18,9 +18,13 @@ None. Uses MagicMirror² builtin fetch
 
 ## Updates
 
+### v1.1.1
+- Fixed bug that ignored the language configuration
+- Fixed changes in default values
+
 ### v1.1.0
 - Removed the `list` option as the visual for it not very apealing.
-- Fixe issue with `cast` which was not updating for each new movie passed in
+- Fixed issue with `cast` which was not updating for each new movie passed in
 - Changed and simplified the way in which movies were being fetched and displayed
 
 ### v1.0.0
