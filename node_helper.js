@@ -37,8 +37,8 @@ module.exports = NodeHelper.create({
             const moviesToFetch = nowPlayingData.results.slice(0, payload.number_to_fetch);
 
             // Fetch movie details and credits for each movie
-            const movieDetailsPromises = moviesToFetch.map(async(movie) => {
-                const movieDetails = await self.fetchMovieDetailsAndCredits(movie.id, payload.apiKey);
+            const movieDetailsPromises = moviesToFetch.map(async (movie) => {
+                const movieDetails = await self.fetchMovieDetailsAndCredits(movie.id, payload.apiKey, payload.language);
                 return movieDetails;
             });
 
@@ -52,12 +52,12 @@ module.exports = NodeHelper.create({
         }
     },
 
-    fetchMovieDetailsAndCredits: async function (movieId, apiKey) {
+    fetchMovieDetailsAndCredits: async function (movieId, apiKey, language) {
         let details;
         let credits;
 
         // Fetch movie details
-        const detailsUrl = 'https://api.themoviedb.org/3/movie/' + movieId + '?language=' + payload.language;
+        const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=${language}`;
         const detailsOptions = {
             method: 'GET',
             headers: {
@@ -71,7 +71,7 @@ module.exports = NodeHelper.create({
             details = await detailsResponse.json();
 
             // Fetch movie credits
-            const creditsUrl = 'https://api.themoviedb.org/3/movie/' + movieId + '/credits?language=' + payload.language;
+            const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=${language}`;
             const creditsOptions = {
                 method: 'GET',
                 headers: {
