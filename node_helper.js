@@ -20,7 +20,7 @@ module.exports = NodeHelper.create({
         let data;
 
         // Fetch Now Playing List
-        const url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+        const url = `https://api.themoviedb.org/3/movie/now_playing?language=${payload.language}&page=1`;
         const options = {
             method: 'GET',
             headers: {
@@ -57,7 +57,7 @@ module.exports = NodeHelper.create({
         let credits;
 
         // Fetch movie details
-        const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+        const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?language=${payload.language}`;
         const detailsOptions = {
             method: 'GET',
             headers: {
@@ -71,7 +71,7 @@ module.exports = NodeHelper.create({
             details = await detailsResponse.json();
 
             // Fetch movie credits
-            const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`;
+            const creditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=${payload.language}`;
             const creditsOptions = {
                 method: 'GET',
                 headers: {
