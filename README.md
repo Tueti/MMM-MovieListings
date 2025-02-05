@@ -11,7 +11,7 @@ The module determines whether it's on the left or right side of the mirror and d
 ## Install
 `cd ~/MagicMirror/modules`
 
-`git clone https://github.com/mumblebaj/MMM-MovieListings.git`
+`git clone https://github.com/Tueti/MMM-MovieListings`
 
 ## Dependencies
 None. Uses MagicMirror² builtin fetch
