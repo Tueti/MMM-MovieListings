@@ -1,7 +1,7 @@
 /* Magic Mirror
  * Module: MMM-MovieListing
  *
- * By Christian Jens https://tueti.github.io
+ * By Christian Jens https://chrischisblog.de
  * Modified by Kyle Johnson
  * Modified by mumblebaj 2024-10-15
  * MIT Licensed.
@@ -220,9 +220,9 @@ Module.register('MMM-MovieListings', {
       var movie = movieSet.details;
       var credits = movieSet.credits;
   
-  //Log.log(credits);
+      //Log.log(credits);
       wrapper = this.wrapper;
-  posterWrapper = this.posterWrapper;
+      posterWrapper = this.posterWrapper;
 
       // set up title
       var title = document.getElementById('title-id');
