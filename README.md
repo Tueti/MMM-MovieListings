@@ -42,9 +42,8 @@ The entry in `config.js` can include the following options:
 |`maxPlotLength`|Sets the max length of the movie plot description. Only necessary if `includeMoviePlot` is set to `true`. Setting this value to `0` shows entire plot. NOTE: This might be a long text and mess with the layout.|`198`|
 |`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`DE`|
 |`language`|The language for the movie titles. Either a simple [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code (DE for Germany, EN for english, etc.) or a region specific language as in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (de-DE for German in Germany, pt-BR for Portugese in Brazil, etc.)|`de-DE`|
-|`interface`|You can choose between a simple list view and a more detailed poster view with movie image and more details. Options is `poster`.|`poster`|
 |`number_to_fetch`|The number of movies to fetch.|`20`|
-|`pageChangeInterval`|Interval in milliseconds to change between pages if you defined a `moviesPerPage` or set display to `poster`|`30 * 1000` = 30 seconds|
+|`pageChangeInterval`|Interval in milliseconds to change between movies`|`30 * 1000` = 30 seconds|
 |`refreshInterval`|Interval in milliseconds to update movie list. Please take the [API documentation](https://developers.themoviedb.org/3/getting-started/request-rate-limiting) for rate limit into account |`1000 * 60 * 60 * 24` = Once a day|
 
 ## Example Config
@@ -55,9 +54,7 @@ Add the module to the modules array in the `config/config.js` file:
 		position: 'bottom_left',
 		config: {
 			apiKey: 'api_key_here',
-			baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
 			header: "Kinofilme",
-			interface: "poster", //'poster', 'detailed'
 			includeMoviePlot: true,
 			number_to_fetch: 20,
 			maxPlotLength: 198,

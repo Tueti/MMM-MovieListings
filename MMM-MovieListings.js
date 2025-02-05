@@ -20,7 +20,6 @@ Module.register('MMM-MovieListings', {
       header: 'Kinofilme',
       moviesPerPage: 0,
       refreshInterval: 1000 * 60 * 60 * 24, //Once a day
-      baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
       animationSpeed: 2.5 * 1000,
       pageChangeInterval: 30 * 1000
   },
