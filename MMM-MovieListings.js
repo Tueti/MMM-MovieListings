@@ -93,7 +93,7 @@ Module.register('MMM-MovieListings', {
       // Set up details => image
       var image = document.createElement('img');
       image.id = "image-id";
-  image.alt = ' poster';
+      image.alt = ' poster';
 
       // Set up details => textArea
       var detailsContainer = document.createElement('p');
@@ -167,7 +167,7 @@ Module.register('MMM-MovieListings', {
 
       imageCell.appendChild(image);
       textCell.appendChild(detailsContainer);
-  if (this.data.position.toLowerCase().indexOf('right') < 0) {
+      if (this.data.position.toLowerCase().indexOf('right') < 0) {
           tableRow.appendChild(imageCell);
           textCell.className = 'top left';
           tableRow.appendChild(textCell);
@@ -185,7 +185,7 @@ Module.register('MMM-MovieListings', {
       if (this.config.includeMoviePlot) {
           posterWrapper.appendChild(plot);
       }
-  this.posterWrapper = posterWrapper;
+      this.posterWrapper = posterWrapper;
       wrapper.appendChild(posterWrapper)
   
       this.wrapper = wrapper;
@@ -265,7 +265,7 @@ Module.register('MMM-MovieListings', {
       
   // Setup cast content = > credits cast
       var castContent = document.getElementById('cast-content');
-  castContent.innerHTML = ''; // ensure that the castContent is empty before populating.
+      castContent.innerHTML = ''; // ensure that the castContent is empty before populating.
       if (credits.cast && credits.cast.length > 0) {
           for (var i = 0; i < Math.min(6, credits.cast.length); i++) {
               castContent.innerHTML += credits.cast[i].name + '<br />';
