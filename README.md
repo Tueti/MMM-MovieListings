@@ -36,8 +36,8 @@ The entry in `config.js` can include the following options:
 |`apiKey`|**required** Your API Read Access Token. Please insert the 'v3 (auth)' key here, not v4. Signup [here](https://www.themoviedb.org/account/signup), then get a key in your profile section -> api|_none_|
 |`includeMoviePlot`|Determins whether a short plot discription will be shown or not. Set to either `true` or `false`|`false`|
 |`maxPlotLength`|Sets the max length of the movie plot description. Only necessary if `includeMoviePlot` is set to `true`. Setting this value to `0` shows entire plot. NOTE: This might be a long text and mess with the layout.|`198`|
-|`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`US`|
-|`language`|The language for the movie titles. Either a simple [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code (DE for Germany, EN for english, etc.) or a region specific language as in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (de-DE for German in Germany, pt-BR for Portugese in Brazil, etc.)|`en-US`|
+|`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`DE`|
+|`language`|The language for the movie titles. Either a simple [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code (DE for Germany, EN for english, etc.) or a region specific language as in [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) (de-DE for German in Germany, pt-BR for Portugese in Brazil, etc.)|`de-DE`|
 |`interface`|You can choose between a simple list view and a more detailed poster view with movie image and more details. Options is `poster`.|`poster`|
 |`number_to_fetch`|The number of movies to fetch.|`20`|
 |`pageChangeInterval`|Interval in milliseconds to change between pages if you defined a `moviesPerPage` or set display to `poster`|`30 * 1000` = 30 seconds|
@@ -53,13 +53,13 @@ Add the module to the modules array in the `config/config.js` file:
 		config: {
 			apiKey: 'api_key_here',
 			baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
-			header: "Movies",
+			header: "Kinofilme",
 			interface: "poster", //'poster', 'detailed'
 			includeMoviePlot: true,
 			number_to_fetch: 20,
 			maxPlotLength: 198,
-			region: "US",
-			language: "en-US",
+			region: "DE",
+			language: "de-DE",
 			pageChangeInterval: 10 * 1000,
 			refreshInterval: 1000 * 60 * 60 * 60 * 24
 		}

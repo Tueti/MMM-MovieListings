@@ -17,7 +17,7 @@ Module.register('MMM-MovieListings', {
       interface: 'poster', 
       includeMoviePlot: false,
       maxPlotLength: 198,
-      header: 'MOVIE',
+      header: 'Kinofilme',
       moviesPerPage: 0,
       refreshInterval: 1000 * 60 * 60 * 24, //Once a day
       baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
