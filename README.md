@@ -53,7 +53,6 @@ Add the module to the modules array in the `config/config.js` file:
 {
 		module: 'MMM-MovieListings',
 		position: 'bottom_left',
-		disabled: false,
 		config: {
 			apiKey: 'api_key_here',
 			baseUrl: 'https://api.themoviedb.org/3/movie/now_playing',
