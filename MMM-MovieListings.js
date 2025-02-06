@@ -239,8 +239,7 @@ Module.register('MMM-MovieListings', {
         // set up tagline
         var tagline = document.getElementById('tagline-id');
         tagline.innerHTML = movie.tagline;
-
-        overviewShort = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength))}&#8230;` : movie.overview;
+        
         // set up plot
         if (this.config.includeMoviePlot) {
             var plot = document.getElementById('plot-id');
@@ -248,28 +247,22 @@ Module.register('MMM-MovieListings', {
             if (this.config.maxPlotLength == 0) {
                 plotContent = movie.overview
             } else {
+                overviewShort = movie.overview.length > this.config.maxPlotLength ? `${movie.overview.substring(0, (this.config.maxPlotLength))}&#8230;` : movie.overview;
                 plotContent = overviewShort;
             }
             plot.innerHTML = plotContent.split(/((?:\S+ ){10})/g).filter(Boolean).join("<br/>");
         }
 
-        // Set up details => textArea
-        var detailsContainer = document.getElementById('details-container');
-        detailsContainer.className = this.data.position.toLowerCase().indexOf('right') < 0 ? 'marginLeft' : 'marginRight';
-
         // Set up details => rating
         var detailsRatingVote = document.getElementById('details-rating-vote');
         detailsRatingVote.innerHTML = movie.vote_average + ' / 10';
+
         var detailsRatingVotings = document.getElementById('details-rating-votings');
         detailsRatingVotings.innerHTML = ' (' + movie.vote_count + ' ' + this.translate('RATINGS') + ')';
 
         // Set up details => runtime
         var runtimeContent = document.getElementById('runtime-content');
         runtimeContent.innerHTML = movie.runtime + ' ' + this.translate('MIN');
-
-        // Set up details => credits actors
-        var creditsContainer = document.getElementById('credits-container');
-        creditsContainer.className = 'marginTop xsmall';
 
         // Setup cast content = > credits cast
         var castContent = document.getElementById('cast-content');
@@ -283,6 +276,7 @@ Module.register('MMM-MovieListings', {
         // Set up details => credits director
         var directorHeader = document.getElementById('director-header');
         directorHeader.innerHTML = ', ' + this.translate('DIRECTOR');
+
         var directorContent = document.getElementById('director-content');
         if (credits.crew && credits.crew.length > 0) {
             for (var i = 0; i <= credits.crew.length - 1; i++) {
