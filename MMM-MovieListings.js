@@ -199,33 +199,32 @@ Module.register('MMM-MovieListings', {
 
 
     /*
-     * VIEW POPULATION
+     * VIEW POPULATION (DOM MANIPULATION)
      * Fill the appropriate view with life (data)
      */
+    // Temporarily removed list view
+    // createListView: function (movies) {
+    //     var table = document.createElement('table');
+    //     table.className = 'small';
 
-    // Different view styles
-    createListView: function (movies) {
-        var table = document.createElement('table');
-        table.className = 'small';
+    //     for (var i = 0; i <= movies.length - 1; i++) {
+    //         var movie = movies[i];
 
-        for (var i = 0; i <= movies.length - 1; i++) {
-            var movie = movies[i];
+    //         var tableRow = document.createElement('tr');
+    //         var tableData = document.createElement('td');
 
-            var tableRow = document.createElement('tr');
-            var tableData = document.createElement('td');
+    //         var cell = document.createElement('span');
+    //         cell.innerHTML = movie.title;
 
-            var cell = document.createElement('span');
-            cell.innerHTML = movie.title;
+    //         tableData.appendChild(cell);
+    //         tableRow.appendChild(tableData);
+    //         table.appendChild(tableRow);
+    //     }
 
-            tableData.appendChild(cell);
-            tableRow.appendChild(tableData);
-            table.appendChild(tableRow);
-        }
+    //     return table;
+    // },
 
-        return table;
-    },
-
-    createPosterView: function (movieSet) {
+    populateContentIntoPosterView: function (movieSet) {
         var movie = movieSet.details;
         var credits = movieSet.credits;
 
@@ -315,7 +314,7 @@ Module.register('MMM-MovieListings', {
         self.nextIndex = 0; // Start at the first movie
 
         // Display the first movie
-        this.posterToDisplay = this.createPosterView(movies[self.nextIndex]);
+        this.currentMovie = this.populateContentIntoPosterView(movies[self.nextIndex]);
 
         // After DOM update, set the image source
         setTimeout(function () {
@@ -334,7 +333,7 @@ Module.register('MMM-MovieListings', {
                 self.nextIndex = 0;
             }
 
-            self.posterToDisplay = self.createPosterView(movies[self.nextIndex]);
+            self.currentMovie = self.populateContentIntoPosterView(movies[self.nextIndex]);
 
             // After DOM update, set the image source again
             setTimeout(function () {
