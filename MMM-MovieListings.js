@@ -61,18 +61,27 @@ Module.register('MMM-MovieListings', {
      * DOM CREATION
      */
 
+    // Main function for view updates
     getDom: function () {
-
         var wrapper = document.createElement('div')
         wrapper.id = "movie-listing";
+
         var header = document.createElement('header');
         header.innerHTML = this.config.header;
         wrapper.appendChild(header);
 
+        this.posterWrapper = this.setupDomForPosterView();
+        wrapper.appendChild(this.posterWrapper)
+
+        this.wrapper = wrapper;
+        return this.wrapper;
+    },
+
+    // Creates containers for the poster view
+    setupDomForPosterView: function () {
         var posterWrapper = document.createElement('div');
         posterWrapper.id = "poster-wrapper";
         posterWrapper.className = 'xsmall';
-
 
         // set up title
         var title = document.createElement('div');
@@ -139,7 +148,7 @@ Module.register('MMM-MovieListings', {
 
         // Set up details => table
         var detailsTable = document.createElement('table');
-        detailsTable.id = "detais-table";
+        detailsTable.id = "details-table";
         detailsTable.className = 'xsMarginTop';
         var tableRow = document.createElement('tr');
         tableRow.id = "table-row";
@@ -184,16 +193,18 @@ Module.register('MMM-MovieListings', {
         if (this.config.includeMoviePlot) {
             posterWrapper.appendChild(plot);
         }
-        this.posterWrapper = posterWrapper;
-        wrapper.appendChild(posterWrapper)
 
-        this.wrapper = wrapper;
-
-        return this.wrapper;
+        return posterWrapper;
     },
 
+
+    /*
+     * VIEW POPULATION
+     * Fill the appropriate view with life (data)
+     */
+
     // Different view styles
-    createTableView: function (movies) {
+    createListView: function (movies) {
         var table = document.createElement('table');
         table.className = 'small';
 
@@ -296,7 +307,7 @@ Module.register('MMM-MovieListings', {
         }
 
         // Set up details => table
-        var detailsTable = document.getElementById('detais-table');
+        var detailsTable = document.getElementById('details-table');
         var tableRow = document.getElementById('table-row');
         var imageCell = document.getElementById('image-cell');
         var textCell = document.getElementById('text-cell');
