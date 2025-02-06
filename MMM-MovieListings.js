@@ -53,7 +53,7 @@ Module.register('MMM-MovieListings', {
         if (notification === 'MOVIE_LIST_DONE') {
             // Store the combined movie data (details and credits)
             this.movies = payload; // payload now contains combined movie details and credits
-            this.prepareDomUpdate(this.movies); // Call to handle the data
+            this.scheduleDomUpdatesForPoster(this.movies); // Call to handle the data
         }
     },
 
@@ -259,7 +259,6 @@ Module.register('MMM-MovieListings', {
         detailsContainer.className = this.data.position.toLowerCase().indexOf('right') < 0 ? 'marginLeft' : 'marginRight';
 
         // Set up details => rating
-        var detailsRatingContainer = document.getElementById('details-rating-container');
         var detailsRatingVote = document.getElementById('details-rating-vote');
         detailsRatingVote.innerHTML = movie.vote_average + ' / 10';
         var detailsRatingVotings = document.getElementById('details-rating-votings');
@@ -283,7 +282,6 @@ Module.register('MMM-MovieListings', {
         }
 
         // Set up details => credits director
-        var directorContainer = document.getElementById('director-container');
         var directorHeader = document.getElementById('director-header');
         directorHeader.innerHTML = ', ' + this.translate('DIRECTOR');
         var directorContent = document.getElementById('director-content');
@@ -306,36 +304,18 @@ Module.register('MMM-MovieListings', {
             }
         }
 
-        // Set up details => table
-        var detailsTable = document.getElementById('details-table');
-        var tableRow = document.getElementById('table-row');
-        var imageCell = document.getElementById('image-cell');
-        var textCell = document.getElementById('text-cell');
-
         return posterWrapper;
     },
 
     /*
      * HELPER
      */
-    prepareDomUpdate: function (movies) {
-        switch (this.config.interface) {
-            case 'poster':
-                // Handle poster view without calling back to node_helper.js
-                this.scheduleDomUpdatesForPoster(movies); // Directly update posters with the received movie data
-                break;
-            default:
-                break;
-        }
-    },
-
     scheduleDomUpdatesForPoster: function (movies) {
         var self = this;
         self.nextIndex = 0; // Start at the first movie
 
         // Display the first movie
         this.posterToDisplay = this.createPosterView(movies[self.nextIndex]);
-        //this.updateDom();
 
         // After DOM update, set the image source
         setTimeout(function () {
@@ -355,7 +335,6 @@ Module.register('MMM-MovieListings', {
             }
 
             self.posterToDisplay = self.createPosterView(movies[self.nextIndex]);
-            //self.updateDom();
 
             // After DOM update, set the image source again
             setTimeout(function () {
@@ -367,5 +346,4 @@ Module.register('MMM-MovieListings', {
             }, 100); // Delay slightly to ensure DOM is updated first
         }, this.config.pageChangeInterval);
     }
-
 });
