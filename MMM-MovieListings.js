@@ -51,7 +51,6 @@ Module.register('MMM-MovieListings', {
             Log.log(this.name + ': Error');
         }
         if (notification === 'MOVIE_LIST_DONE') {
-            // Store the combined movie data (details and credits)
             this.movies = payload; // payload now contains combined movie details and credits
             this.scheduleDomUpdatesForPoster(this.movies); // Call to handle the data
         }
@@ -67,6 +66,7 @@ Module.register('MMM-MovieListings', {
         wrapper.id = "movie-listing";
 
         var header = document.createElement('header');
+        header.id = "header-id";
         header.innerHTML = this.config.header;
         wrapper.appendChild(header);
 
