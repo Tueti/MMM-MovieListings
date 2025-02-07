@@ -1,7 +1,7 @@
 # The original MMM-MovieListings
 
 ## NOTE FOR UPDATE 1.2.0:
-Sometimes things slip through. I am very thankful for the community work to this module. But after the last Pull Request, which brought this item up to speed with the architecture of MagicMirror² and added major improvements to the way the requests were handled, some features had been lost and a few bugs creeped in. I should have caught them before merging the code into production, but I didn't. Sorry for any inconvinience that this has caused. My latest update should fix those things, reinstate the List view and restore proper User Experience (such as animations). Plus I didn't only added the List back in, I gave it an overhaul to make it look (a little) better. Enjoy!
+Version 1.1.0 might have caused issues for you. Those issues should now be resolved. Please update to 1.2.0 and give the module another try. I'd really appreciate that. If you still experience issues, please let me know via Github Issue!
 
 ## Description
 Displays the top 20 movies that are currently in theaters around you. The list is fetched from [The Movie Database](https://themoviedb.org).
