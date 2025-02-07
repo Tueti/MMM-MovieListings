@@ -38,6 +38,7 @@ The entry in `config.js` can include the following options:
 |---|---|---|
 |`header`|The header of the module|Kinofilme|
 |`apiKey`|**required** Your API Read Access Token. Please insert the 'v3 (auth)' key here, not v4. Signup [here](https://www.themoviedb.org/account/signup), then get a key in your profile section -> api|_none_|
+|`interface`|Defines how the module will be presented. Movies can either be shown as a poster with details or a simple list. User `poster` or `list` as values.|`poster`|
 |`includeMoviePlot`|Determins whether a short plot discription will be shown or not. Set to either `true` or `false`|`false`|
 |`maxPlotLength`|Sets the max length of the movie plot description. Only necessary if `includeMoviePlot` is set to `true`. Setting this value to `0` shows entire plot. NOTE: This might be a long text and mess with the layout.|`198`|
 |`region`|The region you want to see the movie listing for. Insert a region as an [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code (DE for Germany, US for United States, GB for United Kingdom, etc...) |`DE`|
@@ -55,6 +56,7 @@ Add the module to the modules array in the `config/config.js` file:
 		config: {
 			apiKey: 'api_key_here',
 			header: "Kinofilme",
+			interface: "poster",
 			includeMoviePlot: true,
 			number_to_fetch: 20,
 			maxPlotLength: 198,

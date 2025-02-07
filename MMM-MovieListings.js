@@ -81,8 +81,14 @@ Module.register('MMM-MovieListings', {
             return wrapper;
         }
 
-        var posterWrapper = document.createElement('div').appendChild(this.createDomForPosterView());
-        wrapper.appendChild(posterWrapper);
+        if (this.config.interface === 'poster') {
+            var posterWrapper = document.createElement('div').appendChild(this.createDomForPosterView());
+            wrapper.appendChild(posterWrapper);
+        }
+        else if (this.config.interface === 'list') {
+            var listWrapper = document.createElement('div').appendChild(this.createDomForListView());
+            wrapper.appendChild(listWrapper);
+        }
 
         return wrapper;
     },
@@ -227,6 +233,27 @@ Module.register('MMM-MovieListings', {
         return posterWrapper;
     },
 
+    createDomForListView: function () {
+        var table = document.createElement('table');
+        table.className = 'small';
+
+        for (var i = 0; i < this.movieList.length; i++) {
+            var movie = this.movieList[i];
+
+            var tableRow = document.createElement('tr');
+            var tableData = document.createElement('td');
+
+            var cell = document.createElement('span');
+            cell.innerHTML = movie.details.title;
+
+            tableData.appendChild(cell);
+            tableRow.appendChild(tableData);
+            table.appendChild(tableRow);
+        }
+
+        return table;
+    },
+
     /*
      * HELPER
      */
@@ -240,45 +267,21 @@ Module.register('MMM-MovieListings', {
         var self = this;
         self.movieIndex = 0;
 
-        this.currentMovie = movies[self.movieIndex];
-        this.updateDom(this.config.animationSpeed);
+        if (this.config.interface === 'poster') {
+            this.currentMovie = movies[self.movieIndex];
+            this.updateDom(this.config.animationSpeed);
 
-        setInterval(function () {
-            self.movieIndex++;
-            if (self.movieIndex >= movies.length) {
-                self.movieIndex = 0;
-            }
-            self.currentMovie = movies[self.movieIndex];
-            self.updateDom(self.config.animationSpeed);
-        }, 5000);
+            setInterval(function () {
+                self.movieIndex++;
+                if (self.movieIndex >= movies.length) {
+                    self.movieIndex = 0;
+                }
+                self.currentMovie = movies[self.movieIndex];
+                self.updateDom(self.config.animationSpeed);
+            }, this.config.pageChangeInterval);
+        } else {
+            //this.movies = movies;
+            this.updateDom(this.config.animationSpeed);
+        }
     }
-
-
-
-
-    // /*
-    //  * VIEW POPULATION (DOM MANIPULATION)
-    //  * Fill the appropriate view with life (data)
-    //  */
-    // // Temporarily removed list view
-    // // createListView: function (movies) {
-    // //     var table = document.createElement('table');
-    // //     table.className = 'small';
-
-    // //     for (var i = 0; i <= movies.length - 1; i++) {
-    // //         var movie = movies[i];
-
-    // //         var tableRow = document.createElement('tr');
-    // //         var tableData = document.createElement('td');
-
-    // //         var cell = document.createElement('span');
-    // //         cell.innerHTML = movie.title;
-
-    // //         tableData.appendChild(cell);
-    // //         tableRow.appendChild(tableData);
-    // //         table.appendChild(tableRow);
-    // //     }
-
-    // //     return table;
-    // // },
 });
