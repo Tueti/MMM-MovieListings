@@ -12,7 +12,6 @@ Module.register('MMM-MovieListings', {
     // Default module config.
     defaults: {
         apiKey: '',
-        region: 'DE',
         language: 'de-DE',
         interface: 'poster',
         includeMoviePlot: false,
