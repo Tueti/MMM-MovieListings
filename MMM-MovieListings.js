@@ -237,16 +237,21 @@ Module.register('MMM-MovieListings', {
         var table = document.createElement('table');
         table.className = 'small';
 
-        for (var i = 0; i < this.movieList.length; i++) {
-            var movie = this.movieList[i];
+        for (var i = 0; i < this.currentMovieList.length; i++) {
+            var movie = this.currentMovieList[i];
 
             var tableRow = document.createElement('tr');
             var tableData = document.createElement('td');
 
-            var cell = document.createElement('span');
-            cell.innerHTML = movie.details.title;
+            var title = document.createElement('div');
+            title.innerHTML = movie.details.title;
 
-            tableData.appendChild(cell);
+            var runtimeAndRating = document.createElement('div');
+            runtimeAndRating.className = 'xsmall dimmed';
+            runtimeAndRating.innerHTML = `${movie.details.runtime} ${this.translate('MIN')}, ${movie.details.vote_average} / 10 (${movie.details.vote_count} ${this.translate('RATINGS')})`;
+
+            tableData.appendChild(title);
+            tableData.appendChild(runtimeAndRating);
             tableRow.appendChild(tableData);
             table.appendChild(tableRow);
         }
@@ -266,6 +271,7 @@ Module.register('MMM-MovieListings', {
     loopDomUpdates: function (movies) {
         var self = this;
         self.movieIndex = 0;
+        self.listLimit = 0;
 
         if (this.config.interface === 'poster') {
             this.currentMovie = movies[self.movieIndex];
@@ -280,8 +286,21 @@ Module.register('MMM-MovieListings', {
                 self.updateDom(self.config.animationSpeed);
             }, this.config.pageChangeInterval);
         } else {
-            //this.movies = movies;
+            // Get the first 10 movies (max) and display them
+            self.listLimit += 7;
+            this.currentMovieList = movies.slice(0, this.listLimit);
             this.updateDom(this.config.animationSpeed);
+
+            // Set the next upper limit and iterate through the entire movie list.
+            // Reset the limit if the next beginning limit would be higher than the length of the movie list.
+            setInterval(function () {
+                self.listLimit += 7;
+                self.currentMovieList = movies.slice(self.listLimit - 7, self.listLimit);
+                if (self.listLimit > movies.length) {
+                    self.listLimit = 0;
+                }
+                self.updateDom(self.config.animationSpeed);
+            }, this.config.pageChangeInterval);
         }
     }
 });
