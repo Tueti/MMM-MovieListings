@@ -22,7 +22,7 @@ The module determines whether it's on the left or right side of the mirror and d
 None. Uses MagicMirror² builtin fetch
 
 ## Change Log
-For the latest changes, please refer to the [change log](https://github.com/Tueti/MMM-MovieListings/wiki/Change-Log).
+For the latest changes, please refer to the [change log](CHANGELOG.md).
 
 ## Config
 The entry in `config.js` can include the following options:

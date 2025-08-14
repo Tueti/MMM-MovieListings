@@ -1,4 +1,4 @@
-/* Magic Mirror
+/* MagicMirror²
  * Module: MMM-MovieListing
  *
  * By Christian Jens https://chrischisblog.de
